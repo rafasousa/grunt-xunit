@@ -26,13 +26,19 @@ Task targets, files and options may be specified according to the grunt [Configu
 ### Example configuration
 
 ```
+var path = require('path');
+var _ = require('underscore');
+
+var dir = path.resolve('../../Test/TestResults');
+
 grunt.initConfig({
     xunit: {
-        tests: {
-            src: ['Tests/bin/Debug/Tests.dll']
-        },
         options: {
-            silent: true
+            parallel: "all",
+            xml: path.join(dir, _.uniqueId('xunit-results-') + '.xml')
+        },
+        files: {
+            src: 'Tests/bin/Debug/Tests.dll'
         }
     }
 });
